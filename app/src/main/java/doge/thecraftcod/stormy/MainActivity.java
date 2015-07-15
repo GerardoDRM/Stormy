@@ -13,11 +13,15 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 
 
 public class MainActivity extends Activity {
 
+    private CurrentWeather mCurretnWeather;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,14 +48,16 @@ public class MainActivity extends Activity {
                 @Override
                 public void onResponse(Response response) throws IOException {
                     try {
+                        String jsonData = response.body().string();
                         if (response.isSuccessful()) {
-                            alertUserAboutError();
+                           mCurretnWeather = getCurrentDetails(jsonData);
                         } else {
-                            System.out.println(response.body().string());
-
+                            alertUserAboutError();
                         }
 
                     } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (JSONException e) {
                         e.printStackTrace();
                     }
 
@@ -60,6 +66,24 @@ public class MainActivity extends Activity {
         } else {
             Toast.makeText(this, "network unavailable", Toast.LENGTH_LONG).show();
         }
+    }
+
+    private CurrentWeather getCurrentDetails(String jsonData) throws JSONException {
+        JSONObject forecast = new JSONObject(jsonData);
+        String timezone = forecast.getString("timezone");
+
+        JSONObject currently = forecast.getJSONObject("currently");
+
+        CurrentWeather currentWeather = new CurrentWeather();
+        currentWeather.setmHumidity(currently.getDouble("humidity"));
+        currentWeather.setmPrecipChance(currently.getDouble("precipProbability"));
+        currentWeather.setmTime(currently.getLong("time"));
+        currentWeather.setmIcon(currently.getString("icon"));
+        currentWeather.setmSummary(currently.getString("summary"));
+        currentWeather.setmTemperature(currently.getDouble("temperature"));
+        currentWeather.setmTimeZone(timezone);
+
+        return currentWeather;
     }
 
     private void alertUserAboutError() {
