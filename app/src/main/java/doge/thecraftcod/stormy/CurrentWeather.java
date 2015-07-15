@@ -32,8 +32,9 @@ public class CurrentWeather {
         this.mSummary = mSummary;
     }
 
-    public double getmPrecipChance() {
-        return mPrecipChance;
+    public int getmPrecipChance() {
+        double precipPercentage = mPrecipChance * 100;
+        return (int) Math.round(precipPercentage);
     }
 
     public void setmPrecipChance(double mPrecipChance) {
@@ -48,8 +49,8 @@ public class CurrentWeather {
         this.mHumidity = mHumidity;
     }
 
-    public double getmTemperature() {
-        return mTemperature;
+    public int getmTemperature() {
+        return (int)Math.round(mTemperature);
     }
 
     public void setmTemperature(double mTemperature) {
