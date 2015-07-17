@@ -1,8 +1,10 @@
-package doge.thecraftcod.stormy;
+package doge.thecraftcod.stormy.weather;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
+
+import doge.thecraftcod.stormy.R;
 
 /**
  * Created by gerardo on 14/07/15.

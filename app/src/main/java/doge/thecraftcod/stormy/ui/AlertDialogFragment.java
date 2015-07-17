@@ -1,10 +1,12 @@
-package doge.thecraftcod.stormy;
+package doge.thecraftcod.stormy.ui;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.os.Bundle;
+
+import doge.thecraftcod.stormy.R;
 
 /**
  * Created by gerardo on 14/07/15.
