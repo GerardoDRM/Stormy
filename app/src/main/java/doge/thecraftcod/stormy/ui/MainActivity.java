@@ -38,6 +38,7 @@ import doge.thecraftcod.stormy.weather.Hour;
 public class MainActivity extends Activity {
 
     private Forecast forecast;
+    public static final String DAYLY_FORECAST = "DAYLY_FORECAST";
 
     @Bind(R.id.timeL) TextView mTimeL;
     @Bind(R.id.temperatureL) TextView mTemperatureL;
@@ -248,6 +249,7 @@ public class MainActivity extends Activity {
     @OnClick (R.id.dailyBtn)
     public void startDailyActivity(View view) {
         Intent intent = new Intent(this, DailyForecastActivity.class);
+        intent.putExtra(DAYLY_FORECAST, forecast.getmDailyForecast());
         startActivity(intent);
     }
 }
