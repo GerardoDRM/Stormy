@@ -39,6 +39,8 @@ public class MainActivity extends Activity {
 
     private Forecast forecast;
     public static final String DAYLY_FORECAST = "DAYLY_FORECAST";
+    public static final String HOURLY_FORECAST = "HOURLY_FORECAST";
+
 
     @Bind(R.id.timeL) TextView mTimeL;
     @Bind(R.id.temperatureL) TextView mTemperatureL;
@@ -250,6 +252,13 @@ public class MainActivity extends Activity {
     public void startDailyActivity(View view) {
         Intent intent = new Intent(this, DailyForecastActivity.class);
         intent.putExtra(DAYLY_FORECAST, forecast.getmDailyForecast());
+        startActivity(intent);
+    }
+
+    @OnClick (R.id.hourlyBtn)
+    public void startHourlyActivity(View view) {
+        Intent intent = new Intent(this, HourlyForecastActivity.class);
+        intent.putExtra(HOURLY_FORECAST, forecast.getmHuorlyForecast());
         startActivity(intent);
     }
 }
